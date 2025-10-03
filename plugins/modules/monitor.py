@@ -263,6 +263,9 @@ options:
   jsonPath:
     description: Json Query
     type: str
+  jsonPathOperator:
+    description: Operator for comparing json query to expectedResult
+    type: str
   expectedValue:
     description: Expected Value
     type: str
@@ -540,6 +543,7 @@ def main():
         game=dict(type="str"),
         gamedigGivenPortOnly=dict(type="bool"),
         jsonPath=dict(type="str"),
+        jsonPathOperator=dict(type="str"),
         expectedValue=dict(type="str"),
         kafkaProducerBrokers=dict(type="str"),
         kafkaProducerTopic=dict(type="str"),

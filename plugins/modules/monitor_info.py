@@ -392,6 +392,11 @@ monitors:
       returned: always
       type: bool
       sample: False
+    jsonPathOperator:
+      description: Operator for comparing json query to expectedResult
+      returned: always
+      type: str
+      sample: None
     jsonPath:
       description: Json Query
       returned: always
