@@ -353,7 +353,7 @@ import traceback
 from ansible.module_utils.basic import AnsibleModule, missing_required_lib
 from ansible_collections.lucasheld.uptime_kuma.plugins.module_utils.common import object_changed, clear_params, \
     common_module_args, get_proxy_by_host_port, get_notification_by_name, get_monitor_by_name, clear_unset_params, \
-    get_docker_host_by_name
+    get_docker_host_by_name, get_group_by_name
 
 try:
     from uptime_kuma_api import UptimeKumaApi, MonitorType
@@ -392,6 +392,12 @@ def run(api, params, result):
             notification_ids.append(notification["id"])
         params["notificationIDList"] = notification_ids
     del params["notification_names"]
+
+    if params["group_name"] is not None:
+        group = get_group_by_name(api, params["group_name"])
+        if group:
+            params["monitorGroupSelector"] = group["id"]
+    del params["group_name"]
 
     # proxy -> proxyId
     if params["proxy"]:
@@ -459,6 +465,7 @@ def main():
         notificationIDList=dict(type="list", elements="int"),
         notification_names=dict(type="list", elements="str"),
         httpBodyEncoding=dict(type="str"),
+        group_name=dict(type="int"),
 
         # HTTP, KEYWORD
         url=dict(type="str"),

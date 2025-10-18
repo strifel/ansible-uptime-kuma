@@ -68,6 +68,11 @@ def get_notification_by_name(api, name):
         if notification["name"] == name:
             return notification
 
+def get_group_by_name(api, name):
+    monitors = api.get_monitors()
+    for monitor in monitors:
+        if monitor["name"] == name and monitor["type"] == "group":
+            return monitor
 
 def get_monitor_by_name(api, name):
     monitors = api.get_monitors()
