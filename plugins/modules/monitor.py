@@ -411,6 +411,9 @@ def run(api, params, result):
         params["parent"] = monitor["id"]
     del params["parent_name"]
 
+    params["smtpSecurity"] = params["smtp_security"]
+    del params["smtp_security"]
+
     state = params["state"]
     options = clear_params(params)
     options = clear_unset_params(options)
@@ -551,6 +554,9 @@ def main():
         kafkaProducerSsl=dict(type="bool"),
         kafkaProducerAllowAutoTopicCreation=dict(type="bool"),
         kafkaProducerSaslOptions=dict(type="dict"),
+
+        # SMTP
+        smtp_security=dict(type="str"),
 
         state=dict(type="str", default="present", choices=["present", "absent", "paused", "resumed"])
     )
