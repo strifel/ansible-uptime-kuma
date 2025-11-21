@@ -491,6 +491,7 @@ def main():
         oauth_client_secret=dict(type="str"),
         oauth_scopes=dict(type="str"),
         timeout=dict(type="int"),
+        ipFamily=dict(type="str"),
 
         # KEYWORD
         keyword=dict(type="str"),
